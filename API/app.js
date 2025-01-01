@@ -28,8 +28,14 @@ if (!email){
 }
 
 if (!password){
-    return res.status(422).json({msg: 'A password é obrigatorio' })
+    return res.status(422).json({msg: 'A sennha é obrigatorio' })
 }
+
+if (password !== confirmpassword) {
+    return res.status(422).json({msg: 'As senhas sao diferentes' })
+}
+
+else {return res.status(200).json({msg: 'Deu certo' })}
 
 })
 
