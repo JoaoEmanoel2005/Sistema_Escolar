@@ -35,7 +35,32 @@ if (password !== confirmpassword) {
     return res.status(422).json({msg: 'As senhas sao diferentes' })
 }
 
-else {return res.status(200).json({msg: 'Deu certo' })}
+const userExists = await User.findOne({ email: email })
+
+if(userExists){
+    return res.status(422).json({msg: 'Este email ja foi cadastrado' })
+}
+
+const salt = await bcrypt.genSalt(12)
+
+const passwordHash = await bcrypt.hash(password, salt)
+
+const user = new User({
+    name,
+    email,
+    password: passwordHash,
+})
+
+try{
+
+await user.save()
+
+res.status(201).json({msg: 'Usuario criado com sucesso'})
+
+} catch(error){
+    console.log(error)
+    res.status(500).json({msg: 'Ocorreu um erro no servidor, tente novamente'})
+}
 
 })
 
