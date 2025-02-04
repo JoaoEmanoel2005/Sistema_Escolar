@@ -13,8 +13,6 @@ document.getElementById("cadastroForm").addEventListener("submit", function(even
         return;
     }
 
-    // Aqui você pode adicionar mais validações se necessário (ex: formato de email, senha forte, etc.)
-
     // Caso a validação seja bem-sucedida
     document.getElementById("resultado").innerHTML = "Cadastro realizado com sucesso!";
     document.getElementById("resultado").style.color = "green";
